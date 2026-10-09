@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%2305070f'/%3E%3Ctext x='50' y='68' font-family='Arial' font-size='54' font-weight='bold' text-anchor='middle' fill='%232ee6ff'%3EBH%3C/text%3E%3C/svg%3E" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="theme-color" content="#04060d" />
+<meta name="description" content="Burra Hemanth Goud — Computer Science & AI/ML developer crafting practical software and intelligent web experiences." />
+<title>Burra Hemanth Goud · AI / ML Developer</title>
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<!-- Custom cursor (desktop only) -->
+<div class="cursor-dot" id="cursorDot" aria-hidden="true"></div>
+<div class="cursor-ring" id="cursorRing" aria-hidden="true"></div>
+
+<!-- Ambient cinematic background layers -->
+<canvas id="bgCanvas" aria-hidden="true"></canvas>
+<div class="nebula" aria-hidden="true">
+  <span class="blob blob--a"></span>
+  <span class="blob blob--b"></span>
+  <span class="blob blob--c"></span>
+</div>
+<div class="grid-floor" aria-hidden="true"><div class="grid-floor__lines"></div></div>
+<div class="vignette" aria-hidden="true"></div>
+<div class="noise" aria-hidden="true"></div>
+
+<!-- ============================ NAVBAR ============================ -->
+<header class="nav" id="navbar">
+  <div class="nav__inner container">
+    <a href="#home" class="logo" data-magnetic>BH<span>.</span></a>
+
+    <nav class="nav__links" id="navLinks" aria-label="Primary">
+      <ul>
+        <li><a href="#home" class="is-active" data-nav>Home</a></li>
+        <li><a href="#about" data-nav>About</a></li>
+        <li><a href="#skills" data-nav>Skills</a></li>
+        <li><a href="#projects" data-nav>Projects</a></li>
+        <li><a href="#education" data-nav>Education</a></li>
+        <li><a href="#contact" data-nav>Contact</a></li>
+      </ul>
+    </nav>
+
+    <div class="nav__actions">
+      <button class="music-btn" id="musicBtn" aria-haspopup="dialog" aria-expanded="false">
+        <span class="eq" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+        <span>MUSIC</span>
+      </button>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ============================ MUSIC PANEL ============================ -->
+<aside class="music-panel glass" id="musicPanel" role="dialog" aria-labelledby="mpTitle" aria-hidden="true">
+  <div class="music-panel__head">
+    <div>
+      <p class="music-panel__eyebrow">// AMBIENT SYSTEM</p>
+      <h3 id="mpTitle">PEACEFUL MODE</h3>
+      <p class="music-panel__sub">Choose a soundscape.</p>
+    </div>
+    <button class="music-close" id="musicClose" aria-label="Close panel">&times;</button>
+  </div>
+
+  <ul class="tracklist" id="trackList"><!-- populated by JS --></ul>
+
+  <div class="music-panel__foot">
+    <div class="vol">
+      <span>VOL</span>
+      <input type="range" min="0" max="100" value="45" id="volumeSlider" aria-label="Volume" />
+    </div>
+    <p class="hint">Drop audio files into <code>/assets/audio/</code> to activate tracks.</p>
+  </div>
+</aside>
+<audio id="ambientAudio" loop preload="none"></audio>
+
+<main>
+  <!-- ============================ HERO ============================ -->
+  <section class="hero" id="home">
+    <div class="container hero__grid">
+      <div class="hero__left reveal">
+        <p class="hero__name">BURRA&nbsp;HEMANTH&nbsp;GOUD</p>
+        <h1 class="hero__title"><span class="glitch" data-text="HEMANTH">HEMANTH</span></h1>
+        <p class="hero__role">Computer&nbsp;Science&nbsp;&nbsp;|&nbsp;&nbsp;AI&nbsp;&amp;&nbsp;ML&nbsp;&nbsp;|&nbsp;&nbsp;Developer</p>
+        <p class="hero__desc">I build practical software and AI-based solutions, turning ideas into real-world impact.</p>
+        <div class="hero__cta">
+          <a href="#projects" class="btn btn--primary" data-magnetic>EXPLORE MY WORK <span>&rarr;</span></a>
+          <a href="#contact" class="btn btn--ghost" data-magnetic>GET IN TOUCH</a>
+        </div>
+        <ul class="hero__stats">
+          <li><strong>CS / AIML</strong><span>Degree Focus</span></li>
+          <li><strong>Web + AI</strong><span>Building Stack</span></li>
+          <li><strong>Prompt Eng.</strong><span>Specialty</span></li>
+        </ul>
+      </div>
+
+      <div class="hero__right">
+        <div class="portrait-wrap" id="portraitWrap">
+          <div class="ai-viz" aria-hidden="true">
+            <span class="ring ring--1"></span>
+            <span class="ring ring--2"></span>
+            <span class="ring ring--3"></span>
+            <span class="halo"></span>
+            <canvas id="binaryCanvas" width="520" height="520"></canvas>
+            <span class="node node--1"></span>
+            <span class="node node--2"></span>
+            <span class="node node--3"></span>
+            <span class="node node--4"></span>
+          </div>
+          <figure class="portrait-frame">
+            <img src="/assets/profile.png" alt="Portrait of Burra Hemanth Goud" onerror="this.style.display='none';this.closest('.portrait-frame').classList.add('no-photo')" />
+            <figcaption class="monogram">HG</figcaption>
+          </figure>
+        </div>
+
+        <article class="project-card glass floaty" data-tilt>
+          <div class="pc-top">
+            <span class="pc-badge">FEATURED PROJECT</span>
+            <span class="ticket" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M3 8a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v1a2 2 0 0 0 0 4v1a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-1a2 2 0 0 0 0-4V8Z"/>
+                <path d="M12 6v12" stroke-dasharray="2 2"/>
+              </svg>
+            </span>
+          </div>
+          <h3 class="pc-title">COUPON CODE</h3>
+          <p class="pc-desc">A web-based coupon &amp; token marketplace concept designed to discover, manage and solve digital offers.</p>
+          <div class="tags"><span>PHP</span><span>MySQL</span><span>HTML</span><span>CSS</span><span>JavaScript</span></div>
+          <a href="#projects" class="pc-link">VIEW PROJECT <span>&rarr;</span></a>
+        </article>
+      </div>
+    </div>
+
+    <a href="#about" class="scroll-cue" aria-label="Scroll down">
+      <span>SCROLL</span><span class="mouse"><i></i></span>
+    </a>
+  </section>
+
+  <!-- ============================ ABOUT ============================ -->
+  <section class="section about" id="about">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">// WHO I AM</p>
+        <h2 class="section-title">ABOUT ME</h2>
+      </div>
+      <div class="about__grid">
+        <div class="about__text reveal">
+          <p>I'm <strong>Burra Hemanth Goud</strong>, a Computer Science student specializing in Artificial Intelligence &amp; Machine Learning. I live at the intersection of logic and creativity — designing systems that think, interfaces that feel, and products that ship.</p>
+          <p>My focus spans full-stack web development, applied AI, machine learning fundamentals and prompt engineering. I enjoy breaking complex problems into clean, efficient solutions and turning abstract concepts into tangible, working software.</p>
+          <div class="about__chips">
+            <span>Software Development</span><span>Artificial Intelligence</span><span>Machine Learning</span>
+            <span>Web Development</span><span>Problem Solving</span><span>AI Prompt Engineering</span>
+          </div>
+        </div>
+
+        <div class="about__visual glass reveal" data-tilt>
+          <div class="terminal">
+            <div class="terminal__bar"><i></i><i></i><i></i><span>hemanth@dev:~</span></div>
+<pre class="terminal__body"><code><span class="c-com"># initializing profile...</span>
+<span class="c-key">const</span> <span class="c-var">developer</span> = {
+  name:   <span class="c-str">'Burra Hemanth Goud'</span>,
+  degree: <span class="c-str">'B.Tech CS - AIML'</span>,
+  stack:  [<span class="c-str">'Python'</span>, <span class="c-str">'JS'</span>, <span class="c-str">'SQL'</span>],
+  passion:<span class="c-str">'building intelligent systems'</span>,
+  status: <span class="c-str">'learning // shipping'</span>
+};</code></pre>
+          </div>
+          <div class="orbit-mini" aria-hidden="true">
+            <span class="mini-node n1">AI</span><span class="mini-node n2">ML</span><span class="mini-node n3">WEB</span><span class="mini-core"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ SKILLS ============================ -->
+  <section class="section skills" id="skills">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">// CAPABILITIES</p>
+        <h2 class="section-title">SKILLS</h2>
+      </div>
+      <div class="skills__grid">
+        <article class="skill-card glass reveal">
+          <div class="skill-card__icon">&#60;/&#62;</div>
+          <h3>Programming</h3><ul><li>Python</li><li>Java</li></ul>
+        </article>
+        <article class="skill-card glass reveal">
+          <div class="skill-card__icon">{ }</div>
+          <h3>Web Technologies</h3><ul><li>HTML5</li><li>CSS3</li><li>JavaScript</li></ul>
+        </article>
+        <article class="skill-card glass reveal">
+          <div class="skill-card__icon">&#9638;</div>
+          <h3>Database</h3><ul><li>SQL</li><li>MySQL</li><li>DBMS</li></ul>
+        </article>
+        <article class="skill-card glass reveal">
+          <div class="skill-card__icon">&#8734;</div>
+          <h3>Core Concepts</h3><ul><li>Data Structures &amp; Algorithms</li><li>OOP</li><li>Debugging</li></ul>
+        </article>
+        <article class="skill-card glass skill-card--wide reveal">
+          <div class="skill-card__icon">&#10024;</div>
+          <h3>Artificial Intelligence</h3><ul><li>Artificial Intelligence</li><li>AI Prompt Engineering</li><li>Applied ML Foundations</li></ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ PROJECTS ============================ -->
+  <section class="section projects" id="projects">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">// SELECTED WORK</p>
+        <h2 class="section-title">PROJECTS</h2>
+      </div>
+      <div class="projects__grid" id="projectsGrid"><!-- populated by JS --></div>
+    </div>
+  </section>
+
+  <!-- ============================ EDUCATION ============================ -->
+  <section class="section education" id="education">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">// JOURNEY</p>
+        <h2 class="section-title">EDUCATION</h2>
+      </div>
+      <ol class="timeline">
+        <li class="tl-item reveal">
+          <span class="tl-node"></span>
+          <div class="tl-card glass">
+            <div class="tl-meta"><span class="tl-year">2025 — 2029</span><span class="tl-tag">ONGOING</span></div>
+            <h3>B.Tech · Computer Science (AI &amp; ML)</h3>
+            <p>Balaji Institute of Technology and Science, Telangana</p>
+          </div>
+        </li>
+        <li class="tl-item reveal">
+          <span class="tl-node"></span>
+          <div class="tl-card glass">
+            <div class="tl-meta"><span class="tl-year">Completed</span><span class="tl-tag tl-tag--alt">CGPA 6.7</span></div>
+            <h3>Diploma · Computer Science Engineering</h3><p>VMR Polytechnic</p>
+          </div>
+        </li>
+        <li class="tl-item reveal">
+          <span class="tl-node"></span>
+          <div class="tl-card glass">
+            <div class="tl-meta"><span class="tl-year">Completed</span><span class="tl-tag tl-tag--alt">CGPA 8.7</span></div>
+            <h3>SSC · 10th Class</h3><p>Auxilium e/m High School</p>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ============================ CONTACT ============================ -->
+  <section class="section contact" id="contact">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">// LET'S CONNECT</p>
+        <h2 class="section-title">CONTACT</h2>
+      </div>
+      <div class="contact__grid">
+        <div class="contact__info reveal">
+          <p class="lead">Have an idea, a role, or just want to talk AI? Send a message — I read everything.</p>
+          <ul class="info-list">
+            <li><span>Name</span><strong>Burra Hemanth</strong></li>
+            <li><span>Location</span><strong>Narsampet, Telangana, India</strong></li>
+            <li><span>Email</span><a href="mailto:burrahemanth184@gmail.com">burrahemanth184@gmail.com</a></li>
+            <li><span>GitHub</span><a href="https://github.com/burrahemanth184-byte" target="_blank" rel="noopener">@burrahemanth184-byte</a></li>
+            <li><span>LinkedIn</span><a href="https://linkedin.com/in/burra-hemanth-b601b6398" target="_blank" rel="noopener">burra-hemanth-b601b6398</a></li>
+          </ul>
+          <div class="socials">
+            <a href="https://github.com/burrahemanth184-byte" target="_blank" rel="noopener" aria-label="GitHub" data-magnetic>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.3.8-.6v-2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.3-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.4-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17.3 4.6 18.3 5 18.3 5c.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6 4.6-1.5 7.9-5.8 7.9-10.9C23.5 5.7 18.3.5 12 .5Z"/></svg>
+            </a>
+            <a href="https://linkedin.com/in/burra-hemanth-b601b6398" target="_blank" rel="noopener" aria-label="LinkedIn" data-magnetic>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14ZM7.12 20.45H3.55V9h3.57v11.45ZM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0Z"/></svg>
+            </a>
+            <a href="mailto:burrahemanth184@gmail.com" aria-label="Email" data-magnetic>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2.5" y="4.5" width="19" height="15" rx="2"/><path d="m3 6 9 7 9-7"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <form class="contact__form glass reveal" id="contactForm" novalidate>
+          <label><span>Name</span><input type="text" name="name" placeholder="Your name" required /></label>
+          <label><span>Email</span><input type="email" name="email" placeholder="you@example.com" required /></label>
+          <label><span>Message</span><textarea name="message" rows="5" placeholder="Tell me about your idea..." required></textarea></label>
+          <button type="submit" class="btn btn--primary btn--full" data-magnetic>SEND MESSAGE <span>&rarr;</span></button>
+          <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ============================ FOOTER ============================ -->
+<footer class="footer">
+  <div class="container footer__inner">
+    <p>&copy; 2026 BURRA HEMANTH GOUD</p>
+    <p class="footer__made">MADE WITH CURIOSITY <span>//</span> AI &amp; ML</p>
+  </div>
+</footer>
+
+<button class="to-top" id="toTop" aria-label="Back to top">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 15 6-6 6 6"/></svg>
+</button>
+
+<script src="script.js"></script>
+</body>
+</html>
